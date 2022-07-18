@@ -70,3 +70,122 @@ add_action("do_feed_atom_comments", "headless_disable_feed", 1);
 //   }
 // }
 // add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
+function vinylmaster_block_categories() {
+	register_block_pattern_category(
+		'future_corporation',
+		array('label' => 'Future Corporation') 
+	);
+}   
+add_action( 'init', 'vinylmaster_block_categories' );
+
+function vinylmaster_block_patterns() {
+	register_block_pattern(
+		'tomlayouts/layout1',
+		array(
+			'title'       => 'Generic Layout 1',
+			'description' => 'One Column Layout 1',
+			'categories' => ['future_corporation'],
+			'content'     => '<!-- wp:paragraph {"align":"center"} -->
+			<p class="has-text-align-center"></p>
+			<!-- /wp:paragraph -->			
+			<!-- wp:heading {"textAlign":"left"} -->
+			<h2 class="has-text-align-left"></h2>
+			<!-- /wp:heading -->			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph -->			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph -->			
+			<!-- wp:separator -->
+			<hr class="wp-block-separator has-alpha-channel-opacity"/>
+			<!-- /wp:separator -->'
+		)
+	);
+
+	register_block_pattern(
+		'tomlayouts/layout2',
+		array(
+			'title' => 'Generic Layout 2',
+			'description' => 'Two Column Layout 1',
+			'categories' => ['future_corporation'],
+			'content' => '<!-- wp:paragraph {"align":"center"} -->
+			<p class="has-text-align-center"></p>
+			<!-- /wp:paragraph -->
+			
+			<!-- wp:columns {"verticalAlignment":"top"} -->
+			<div class="wp-block-columns are-vertically-aligned-top"><!-- wp:column {"verticalAlignment":"top"} -->
+			<div class="wp-block-column is-vertically-aligned-top"><!-- wp:image -->
+			<figure class="wp-block-image"><img alt=""/></figure>
+			<!-- /wp:image -->
+			
+			<!-- wp:heading {"textAlign":"left"} -->
+			<h2 class="has-text-align-left"></h2>
+			<!-- /wp:heading -->
+			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->
+			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph -->
+			
+			<!-- wp:heading {"textAlign":"left"} -->
+			<h2 class="has-text-align-left"></h2>
+			<!-- /wp:heading -->
+			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->
+			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph --></div>
+			<!-- /wp:column -->
+			
+			<!-- wp:column {"verticalAlignment":"top"} -->
+			<div class="wp-block-column is-vertically-aligned-top"><!-- wp:image -->
+			<figure class="wp-block-image"><img alt=""/></figure>
+			<!-- /wp:image -->
+			
+			<!-- wp:heading {"textAlign":"left"} -->
+			<h2 class="has-text-align-left"></h2>
+			<!-- /wp:heading -->
+			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->
+			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph -->
+			
+			<!-- wp:heading {"textAlign":"left"} -->
+			<h2 class="has-text-align-left"></h2>
+			<!-- /wp:heading -->
+			
+			<!-- wp:heading {"textAlign":"left","level":3} -->
+			<h3 class="has-text-align-left"></h3>
+			<!-- /wp:heading -->
+			
+			<!-- wp:paragraph -->
+			<p></p>
+			<!-- /wp:paragraph --></div>
+			<!-- /wp:column --></div>
+			<!-- /wp:columns -->
+			
+			<!-- wp:separator -->
+			<hr class="wp-block-separator has-alpha-channel-opacity"/>
+			<!-- /wp:separator -->'
+		)
+	);
+}
+
+add_action('init', 'vinylmaster_block_patterns');

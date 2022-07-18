@@ -1,13 +1,13 @@
 <?php
 /*
- *  Author: Nate Arnold<hello@natearnold.me>
+ *  Author: Nate Arnold<hello@natearnold.me>, Future Corporation <webmaster@iifuture.com>
  *  Custom functions, support, custom post types and more.
  */
 
 add_theme_support( "post-thumbnails" );
 
 function remove_menus() {
-    remove_menu_page( "index.php" ); //Dashboard
+//     remove_menu_page( "index.php" ); //Dashboard
     remove_menu_page( "jetpack" ); //Jetpack*
     remove_menu_page( "edit-comments.php" ); //Comments
 }
@@ -20,9 +20,9 @@ add_action( "admin_menu", "remove_menus" );
 //     return false;
 // }
 
-include_once("functions/custom-post-types.php");
-include_once("functions/custom-shortcodes.php");
-include_once("functions/custom-taxonomies.php");
+// include_once("functions/custom-post-types.php");
+// include_once("functions/custom-shortcodes.php");
+// include_once("functions/custom-taxonomies.php");
 
 function headless_custom_menu_order( $menu_ord ) {
     if ( !$menu_ord ) return true;
@@ -30,7 +30,8 @@ function headless_custom_menu_order( $menu_ord ) {
     return array(
         "edit.php?post_type=page", // Pages
         "edit.php", // Posts
-        "edit.php?post_type=custom_posts", // Custom Post Type
+        "edit.php?post_type=products", // Products Custom Post Type
+        "edit.php?post_type=industry", // industry Custom Post Type
         "separator1", // First separator
 
         "upload.php", // Media
@@ -44,8 +45,8 @@ function headless_custom_menu_order( $menu_ord ) {
         "separator-last", // Last separator
     );
 }
-add_filter( "custom_menu_order", "headless_custom_menu_order", 10, 1 );
-add_filter( "menu_order", "headless_custom_menu_order", 10, 1 );
+// add_filter( "custom_menu_order", "headless_custom_menu_order", 10, 1 );
+// add_filter( "menu_order", "headless_custom_menu_order", 10, 1 );
 
 function headless_disable_feed() {
     wp_die( __('No feed available, please visit our <a href="'. get_bloginfo("url") .'">homepage</a>!') );
@@ -60,12 +61,12 @@ add_action("do_feed_rss2_comments", "headless_disable_feed", 1);
 add_action("do_feed_atom_comments", "headless_disable_feed", 1);
 
 // Return `null` if an empty value is returned from ACF.
-if (!function_exists("acf_nullify_empty")) {
-  function acf_nullify_empty($value, $post_id, $field) {
-      if (empty($value)) {
-          return null;
-      }
-      return $value;
-  }
-}
-add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
+// if (!function_exists("acf_nullify_empty")) {
+//   function acf_nullify_empty($value, $post_id, $field) {
+//       if (empty($value)) {
+//           return null;
+//       }
+//       return $value;
+//   }
+// }
+// add_filter("acf/format_value", "acf_nullify_empty", 100, 3);

@@ -7,7 +7,44 @@
 
 define('HEADLESS_WP_THEME_VERSION', '1.0.0');
 
-add_theme_support("post-thumbnails");
+add_action('after_setup_theme', 'headless_wp_theme_theme_support', 9);
+/**
+ * Add desired theme supports.
+ *
+ * @since 1.0.0
+ */
+function headless_wp_theme_theme_support()
+{
+
+	// Enable Menus
+	add_theme_support("menus");
+
+	add_theme_support("admin-bar");
+
+	add_theme_support('custom-logo', array(
+		'height'      => 100,
+		'width'       => 300,
+		'flex-height' => true,
+		'flex-width'  => true,
+		'header-text' => array('site-title', 'site-description'),
+	));
+
+	// Add Post thumbnails
+	add_theme_support("post-thumbnails");
+
+	// Adds support for block alignments.
+	add_theme_support('align-wide');
+
+	// Make media embeds responsive.
+	add_theme_support('responsive-embeds');
+
+	// Add support for custom line heights.
+	add_theme_support('custom-line-height');
+
+	// Add support for custom units.
+	add_theme_support('custom-units');
+
+}
 
 /**
  * Register and Enuque JS and CSS Scripts
@@ -15,10 +52,10 @@ add_theme_support("post-thumbnails");
  */
 function headless_wp_theme_enqueue_scripts_styles()
 {
-    // Register/enqueue core plugin styles
-		$site_name = vm_get_current_site_name();
+	// Register/enqueue core plugin styles
+	$site_name = vm_get_current_site_name();
 
-		switch ($site_name) {
+	switch ($site_name) {
 			// case "VinylMaster":
 			// 	$chosenstylesheet = "vinylmaster-gutenberg-front-end.css";
 			// break;
@@ -26,32 +63,32 @@ function headless_wp_theme_enqueue_scripts_styles()
 			// 	$chosenstylesheet = "uscutter-gutenberg-front-end.css";
 			// case "SignMaster";
 			// 	$chosenstylesheet = "signmaster-gutenberg-front-end.css";
-			default:
-				$chosenstylesheet = "gutenberg-front-end.css";
-				break;
-		}
-    // if (vm_get_current_site_name() === "VinylMaster")  {
-    //     $chosenstylesheet = "mainvinylmaster.css";
-    // }
-    // else { //Us Cutter theme elsewise
-    //     $chosenstylesheet = "uscutter.css";
-    // }
-    wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
+		default:
+			$chosenstylesheet = "gutenberg-front-end.css";
+			break;
+	}
+	// if (vm_get_current_site_name() === "VinylMaster")  {
+	//     $chosenstylesheet = "mainvinylmaster.css";
+	// }
+	// else { //Us Cutter theme elsewise
+	//     $chosenstylesheet = "uscutter.css";
+	// }
+	wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
 
-    
-    wp_enqueue_style('headless-wp-editor-css');
 
+	wp_enqueue_style('headless-wp-editor-css');
 }
 
 add_action('wp_enqueue_scripts', 'headless_wp_theme_enqueue_scripts_styles');
 
-function remove_menus() {
-//     remove_menu_page( "index.php" ); //Dashboard
-    remove_menu_page( "jetpack" ); //Jetpack*
-    remove_menu_page( "edit-comments.php" ); //Comments
+function remove_menus()
+{
+	//     remove_menu_page( "index.php" ); //Dashboard
+	remove_menu_page("jetpack"); //Jetpack*
+	remove_menu_page("edit-comments.php"); //Comments
 }
 
-add_action( "admin_menu", "remove_menus" );
+add_action("admin_menu", "remove_menus");
 
 // Remove Admin bar
 // function remove_admin_bar()
@@ -63,32 +100,34 @@ add_action( "admin_menu", "remove_menus" );
 // include_once("functions/custom-shortcodes.php");
 // include_once("functions/custom-taxonomies.php");
 
-function headless_custom_menu_order( $menu_ord ) {
-    if ( !$menu_ord ) return true;
+function headless_custom_menu_order($menu_ord)
+{
+	if (!$menu_ord) return true;
 
-    return array(
-        "edit.php?post_type=page", // Pages
-        "edit.php", // Posts
-        "edit.php?post_type=products", // Products Custom Post Type
-        "edit.php?post_type=industry", // industry Custom Post Type
-        "separator1", // First separator
+	return array(
+		"edit.php?post_type=page", // Pages
+		"edit.php", // Posts
+		"edit.php?post_type=products", // Products Custom Post Type
+		"edit.php?post_type=industry", // industry Custom Post Type
+		"separator1", // First separator
 
-        "upload.php", // Media
-        "themes.php", // Appearance
-        "plugins.php", // Plugins
-        "users.php", // Users
-        "separator2", // Second separator
+		"upload.php", // Media
+		"themes.php", // Appearance
+		"plugins.php", // Plugins
+		"users.php", // Users
+		"separator2", // Second separator
 
-        "tools.php", // Tools
-        "options-general.php", // Settings
-        "separator-last", // Last separator
-    );
+		"tools.php", // Tools
+		"options-general.php", // Settings
+		"separator-last", // Last separator
+	);
 }
 // add_filter( "custom_menu_order", "headless_custom_menu_order", 10, 1 );
 // add_filter( "menu_order", "headless_custom_menu_order", 10, 1 );
 
-function headless_wp_theme_disable_feed() {
-    wp_die( __('No feed available, please visit our <a href="'. get_bloginfo("url") .'">homepage</a>!') );
+function headless_wp_theme_disable_feed()
+{
+	wp_die(__('No feed available, please visit our <a href="' . get_bloginfo("url") . '">homepage</a>!'));
 }
 
 add_action("do_feed", "headless_wp_theme_disable_feed", 1);
@@ -109,15 +148,17 @@ add_action("do_feed_atom_comments", "headless_wp_theme_disable_feed", 1);
 //   }
 // }
 // add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
-function headless_wp_theme_block_categories() {
+function headless_wp_theme_block_categories()
+{
 	register_block_pattern_category(
 		'future_corporation',
-		array('label' => 'Future Corporation') 
+		array('label' => 'Future Corporation')
 	);
-}   
-add_action( 'init', 'headless_wp_theme_block_categories' );
+}
+add_action('init', 'headless_wp_theme_block_categories');
 
-function headless_wp_themer_block_patterns() {
+function headless_wp_theme_block_patterns()
+{
 	register_block_pattern(
 		'tomlayouts/layout1',
 		array(

@@ -268,5 +268,5 @@ function headless_wp_theme_block_patterns()
 	);
 }
 
-//add_action('init', 'headless_wp_theme_block_patterns');
-headless_wp_theme_theme_support();
+add_action('init', 'headless_wp_theme_block_patterns');
+add_action('init', 'headless_wp_theme_theme_support');

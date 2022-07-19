@@ -4,7 +4,46 @@
  *  Custom functions, support, custom post types and more.
  */
 
-add_theme_support( "post-thumbnails" );
+
+define('HEADLESS_WP_THEME_VERSION', '1.0.0');
+
+add_theme_support("post-thumbnails");
+
+/**
+ * Register and Enuque JS and CSS Scripts
+ * TODO add timestamps for the last modfied date as their version numbers or figure out a better way to be sure the site is loading the most updated version is cached and we dont get old versions being loaded after purging caches
+ */
+function headless_wp_theme_enqueue_scripts_styles()
+{
+    // Register/enqueue core plugin styles
+		$site_name = vm_get_current_site_name();
+
+		switch ($site_name) {
+			// case "VinylMaster":
+			// 	$chosenstylesheet = "vinylmaster-gutenberg-front-end.css";
+			// break;
+			// case "USCutter";
+			// 	$chosenstylesheet = "uscutter-gutenberg-front-end.css";
+			// case "SignMaster";
+			// 	$chosenstylesheet = "signmaster-gutenberg-front-end.css";
+			default:
+				$chosenstylesheet = "gutenberg-front-end.css";
+				break;
+		}
+    // if (vm_get_current_site_name() === "VinylMaster")  {
+    //     $chosenstylesheet = "mainvinylmaster.css";
+    // }
+    // else { //Us Cutter theme elsewise
+    //     $chosenstylesheet = "uscutter.css";
+    // }
+    wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
+
+    
+    wp_enqueue_style('headless-wp-editor-css');
+
+}
+
+add_action('wp_enqueue_scripts', 'headless_wp_theme_enqueue_scripts_styles');
 
 function remove_menus() {
 //     remove_menu_page( "index.php" ); //Dashboard
@@ -48,17 +87,17 @@ function headless_custom_menu_order( $menu_ord ) {
 // add_filter( "custom_menu_order", "headless_custom_menu_order", 10, 1 );
 // add_filter( "menu_order", "headless_custom_menu_order", 10, 1 );
 
-function headless_disable_feed() {
+function headless_wp_theme_disable_feed() {
     wp_die( __('No feed available, please visit our <a href="'. get_bloginfo("url") .'">homepage</a>!') );
 }
 
-add_action("do_feed", "headless_disable_feed", 1);
-add_action("do_feed_rdf", "headless_disable_feed", 1);
-add_action("do_feed_rss", "headless_disable_feed", 1);
-add_action("do_feed_rss2", "headless_disable_feed", 1);
-add_action("do_feed_atom", "headless_disable_feed", 1);
-add_action("do_feed_rss2_comments", "headless_disable_feed", 1);
-add_action("do_feed_atom_comments", "headless_disable_feed", 1);
+add_action("do_feed", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_rdf", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_rss", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_rss2", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_atom", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_rss2_comments", "headless_wp_theme_disable_feed", 1);
+add_action("do_feed_atom_comments", "headless_wp_theme_disable_feed", 1);
 
 // Return `null` if an empty value is returned from ACF.
 // if (!function_exists("acf_nullify_empty")) {
@@ -70,15 +109,15 @@ add_action("do_feed_atom_comments", "headless_disable_feed", 1);
 //   }
 // }
 // add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
-function vinylmaster_block_categories() {
+function headless_wp_theme_block_categories() {
 	register_block_pattern_category(
 		'future_corporation',
 		array('label' => 'Future Corporation') 
 	);
 }   
-add_action( 'init', 'vinylmaster_block_categories' );
+add_action( 'init', 'headless_wp_theme_block_categories' );
 
-function vinylmaster_block_patterns() {
+function headless_wp_themer_block_patterns() {
 	register_block_pattern(
 		'tomlayouts/layout1',
 		array(
@@ -188,4 +227,4 @@ function vinylmaster_block_patterns() {
 	);
 }
 
-add_action('init', 'vinylmaster_block_patterns');
+add_action('init', 'headless_wp_theme_block_patterns');

@@ -160,7 +160,7 @@ add_action('init', 'headless_wp_theme_block_categories');
 function headless_wp_theme_block_patterns()
 {
 	register_block_pattern(
-		'tomlayouts/layout1',
+		'blocklayouts/layout1',
 		array(
 			'title'       => 'Generic Layout 1',
 			'description' => 'One Column Layout 1',
@@ -190,7 +190,7 @@ function headless_wp_theme_block_patterns()
 	);
 
 	register_block_pattern(
-		'tomlayouts/layout2',
+		'blocklayouts/layout2',
 		array(
 			'title' => 'Generic Layout 2',
 			'description' => 'Two Column Layout 1',

@@ -16,7 +16,33 @@ add_action('after_setup_theme', 'headless_wp_theme_theme_support', 9);
 function headless_wp_theme_theme_support()
 {
 
-	
+	// Enable Menus
+	add_theme_support("menus");
+
+	add_theme_support("admin-bar");
+
+	add_theme_support('custom-logo', array(
+		'height'      => 100,
+		'width'       => 300,
+		'flex-height' => true,
+		'flex-width'  => true,
+		'header-text' => array('site-title', 'site-description'),
+	));
+
+	// Add Post thumbnails
+	add_theme_support("post-thumbnails");
+
+	// Adds support for block alignments.
+	add_theme_support('align-wide');
+
+	// Make media embeds responsive.
+	add_theme_support('responsive-embeds');
+
+	// Add support for custom line heights.
+	add_theme_support('custom-line-height');
+
+	// Add support for custom units.
+	add_theme_support('custom-units');
 
 }
 
@@ -243,30 +269,4 @@ function headless_wp_theme_block_patterns()
 }
 
 //add_action('init', 'headless_wp_theme_block_patterns');
-// Enable Menus
-add_theme_support("menus");
-
-add_theme_support("admin-bar");
-
-add_theme_support('custom-logo', array(
-	'height'      => 100,
-	'width'       => 300,
-	'flex-height' => true,
-	'flex-width'  => true,
-	'header-text' => array('site-title', 'site-description'),
-));
-
-// Add Post thumbnails
-add_theme_support("post-thumbnails");
-
-// Adds support for block alignments.
-add_theme_support('align-wide');
-
-// Make media embeds responsive.
-add_theme_support('responsive-embeds');
-
-// Add support for custom line heights.
-add_theme_support('custom-line-height');
-
-// Add support for custom units.
-add_theme_support('custom-units');
+headless_wp_theme_theme_support();

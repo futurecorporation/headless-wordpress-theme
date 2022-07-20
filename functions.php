@@ -141,23 +141,24 @@ add_action("do_feed_atom_comments", "headless_wp_theme_disable_feed", 1);
  * ACF (Advanced Custom Fields) functions used in this theme
  * Will only fire if acf is installed and active
  */
-function headless_wp_theme_settings_acf()
-{
-	// Register themes acf options page.
-	$option_page = acf_add_options_page(array(
-		'page_title'    => __('Theme General Settings'),
-		'menu_title'    => __('Theme Settings'),
-		'menu_slug'     => 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'		=> false,
-		// 'update_button' => __('Update', 'acf'),
-		// 'updated_message' => __("Theme Settings Updated", 'acf')
-	));
-}
+// function headless_wp_theme_settings_acf()
+// {
+// 	// Register themes acf options page.
+// 	$option_page = acf_add_options_page(array(
+// 		'page_title'    => __('Theme General Settings'),
+// 		'menu_title'    => __('Theme Settings'),
+// 		'menu_slug'     => 'theme-general-settings',
+// 		'capability'	=> 'edit_posts',
+// 		'redirect'		=> false,
+// 		// 'update_button' => __('Update', 'acf'),
+// 		// 'updated_message' => __("Theme Settings Updated", 'acf')
+// 	));
+// }
+
 // First Check that ACF (advance custom fields is installed and active)d and than initialise the optiosn page
-if (class_exists('acf')) {
-	add_action('acf/init', 'headless_wp_theme_settings_acf');
-}
+// if (class_exists('acf')) {
+// 	add_action('acf/init', 'headless_wp_theme_settings_acf');
+// }
 
 // Return `null` if an empty value is returned from ACF.
 // if (!function_exists("acf_nullify_empty")) {
@@ -169,6 +170,26 @@ if (class_exists('acf')) {
 //   }
 // }
 // add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
+
+
+add_action('acf/init', 'my_acf_op_init');
+function my_acf_op_init()
+{
+
+	// Check function exists.
+	if (function_exists('acf_add_options_page')) {
+
+		// Register options page.
+		$option_page = acf_add_options_page(array(
+			'page_title'    => __('Theme General Settings'),
+			'menu_title'    => __('Theme Settings'),
+			'menu_slug'     => 'theme-general-settings',
+			'capability'    => 'edit_posts',
+			'redirect'      => false
+		));
+	}
+}
+
 function headless_wp_theme_block_categories()
 {
 	register_block_pattern_category(

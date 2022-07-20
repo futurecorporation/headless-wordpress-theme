@@ -5,7 +5,7 @@
  */
 
 
-define('HEADLESS_WP_THEME_VERSION', '1.0.2');
+define('HEADLESS_WP_THEME_VERSION', '1.0.3');
 
 add_action('after_setup_theme', 'headless_wp_theme_theme_support', 9);
 /**
@@ -43,7 +43,6 @@ function headless_wp_theme_theme_support()
 
 	// Add support for custom units.
 	add_theme_support('custom-units');
-
 }
 
 /**
@@ -146,13 +145,13 @@ function headless_wp_theme_settings_acf()
 {
 	// Register themes acf options page.
 	$option_page = acf_add_options_page(array(
-		'page_title' 	=> 'Theme Settings',
-		'menu_title'	=> 'Theme Settings',
-		'menu_slug' 	=> 'theme-settings',
+		'page_title'    => __('Theme General Settings'),
+		'menu_title'    => __('Theme Settings'),
+		'menu_slug'     => 'theme-general-settings',
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false,
-		'update_button' => __('Update', 'acf'),
-		'updated_message' => __("Theme Settings Updated", 'acf')
+		// 'update_button' => __('Update', 'acf'),
+		// 'updated_message' => __("Theme Settings Updated", 'acf')
 	));
 }
 // First Check that ACF (advance custom fields is installed and active)d and than initialise the optiosn page

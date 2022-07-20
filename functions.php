@@ -5,7 +5,7 @@
  */
 
 
-define('HEADLESS_WP_THEME_VERSION', '1.0.3');
+define('HEADLESS_WP_THEME_VERSION', '1.0.4');
 
 add_action('after_setup_theme', 'headless_wp_theme_theme_support', 9);
 /**

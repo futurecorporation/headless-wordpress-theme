@@ -150,6 +150,7 @@ function headless_wp_theme_settings_acf()
 		'menu_slug'     => 'theme-general-settings',
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false,
+		'show_in_graphql' => true,
 		// 'update_button' => __('Update', 'acf'),
 		// 'updated_message' => __("Theme Settings Updated", 'acf')
 	));

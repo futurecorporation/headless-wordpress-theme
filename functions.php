@@ -185,7 +185,8 @@ function my_acf_op_init()
 			'menu_title'    => __('Theme Settings'),
 			'menu_slug'     => 'theme-general-settings',
 			'capability'    => 'edit_posts',
-			'redirect'      => false
+			'redirect'      => false,
+			'show_in_graphql' => true
 		));
 	}
 }

@@ -52,7 +52,7 @@ function headless_wp_theme_theme_support()
 function headless_wp_theme_enqueue_scripts_styles()
 {
 	// Register/enqueue core plugin styles
-	$site_name = vm_get_current_site_name();
+	$site_name = futurecorp_wp_core_headless_plugin_get_current_site_name();
 
 	switch ($site_name) {
 			// case "VinylMaster":

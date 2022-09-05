@@ -49,36 +49,36 @@ function headless_wp_theme_theme_support()
  * Register and Enuque JS and CSS Scripts
  * TODO add timestamps for the last modfied date as their version numbers or figure out a better way to be sure the site is loading the most updated version is cached and we dont get old versions being loaded after purging caches
  */
-function headless_wp_theme_enqueue_scripts_styles()
-{
-	// Register/enqueue core plugin styles
-	$site_name = futurecorp_wp_core_headless_plugin_get_current_site_name();
+// function headless_wp_theme_enqueue_scripts_styles()
+// {
+// 	// Register/enqueue core plugin styles
+// 	$site_name = futurecorp_wp_core_headless_plugin_get_current_site_name();
 
-	switch ($site_name) {
-			// case "VinylMaster":
-			// 	$chosenstylesheet = "vinylmaster-gutenberg-front-end.css";
-			// break;
-			// case "USCutter";
-			// 	$chosenstylesheet = "uscutter-gutenberg-front-end.css";
-			// case "SignMaster";
-			// 	$chosenstylesheet = "signmaster-gutenberg-front-end.css";
-		default:
-			$chosenstylesheet = "gutenberg-front-end.css";
-			break;
-	}
-	// if (vm_get_current_site_name() === "VinylMaster")  {
-	//     $chosenstylesheet = "mainvinylmaster.css";
-	// }
-	// else { //Us Cutter theme elsewise
-	//     $chosenstylesheet = "uscutter.css";
-	// }
-	wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
+// 	switch ($site_name) {
+// 			// case "VinylMaster":
+// 			// 	$chosenstylesheet = "vinylmaster-gutenberg-front-end.css";
+// 			// break;
+// 			// case "USCutter";
+// 			// 	$chosenstylesheet = "uscutter-gutenberg-front-end.css";
+// 			// case "SignMaster";
+// 			// 	$chosenstylesheet = "signmaster-gutenberg-front-end.css";
+// 		default:
+// 			$chosenstylesheet = "gutenberg-front-end.css";
+// 			break;
+// 	}
+// 	// if (vm_get_current_site_name() === "VinylMaster")  {
+// 	//     $chosenstylesheet = "mainvinylmaster.css";
+// 	// }
+// 	// else { //Us Cutter theme elsewise
+// 	//     $chosenstylesheet = "uscutter.css";
+// 	// }
+// 	wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
 
 
-	wp_enqueue_style('headless-wp-editor-css');
-}
+// 	wp_enqueue_style('headless-wp-editor-css');
+// }
 
-add_action('wp_enqueue_scripts', 'headless_wp_theme_enqueue_scripts_styles');
+// add_action('wp_enqueue_scripts', 'headless_wp_theme_enqueue_scripts_styles');
 
 function remove_menus()
 {

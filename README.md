@@ -7,9 +7,6 @@ Headless is a WordPress theme intended to be used in JAMStack projects when a Wo
 ## Highlights
 
 - Index route gets forwarded to `/wp-admin`
-- Custom Post types example in `functions/custom-post-types.php`
-- Custom Taxonomies example in `functions/custom-taxonomies.php`
-- Custom Shortcodes example in `functions/custom-shortcodes.php`
 - Function for hiding admin sections in `functions.php`
 - Custom menu ordering in `functions.php`
 - Disabled RSS feed in `functions.php`

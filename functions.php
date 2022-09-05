@@ -1,11 +1,10 @@
 <?php
 /*
- *  Author: Nate Arnold<hello@natearnold.me>, Future Corporation <webmaster@iifuture.com>
- *  Custom functions, support, custom post types and more.
+ *  Author: Future Corporation <webmaster@iifuture.com>
  */
 
 
-define('HEADLESS_WP_THEME_VERSION', '1.0.5');
+define('HEADLESS_WP_THEME_VERSION', '1.0.6');
 
 add_action('after_setup_theme', 'headless_wp_theme_theme_support', 9);
 /**
@@ -45,59 +44,19 @@ function headless_wp_theme_theme_support()
 	add_theme_support('custom-units');
 }
 
-/**
- * Register and Enuque JS and CSS Scripts
- * TODO add timestamps for the last modfied date as their version numbers or figure out a better way to be sure the site is loading the most updated version is cached and we dont get old versions being loaded after purging caches
- */
-function headless_wp_theme_enqueue_scripts_styles()
+function headless_remove_menus()
 {
-	// Register/enqueue core plugin styles
-	$site_name = futurecorp_wp_core_headless_plugin_get_current_site_name();
-
-	switch ($site_name) {
-			// case "VinylMaster":
-			// 	$chosenstylesheet = "vinylmaster-gutenberg-front-end.css";
-			// break;
-			// case "USCutter";
-			// 	$chosenstylesheet = "uscutter-gutenberg-front-end.css";
-			// case "SignMaster";
-			// 	$chosenstylesheet = "signmaster-gutenberg-front-end.css";
-		default:
-			$chosenstylesheet = "gutenberg-front-end.css";
-			break;
-	}
-	// if (vm_get_current_site_name() === "VinylMaster")  {
-	//     $chosenstylesheet = "mainvinylmaster.css";
-	// }
-	// else { //Us Cutter theme elsewise
-	//     $chosenstylesheet = "uscutter.css";
-	// }
-	wp_register_style('headless-wp-editor-css', get_theme_file_uri() . '/assets/css/' . $chosenstylesheet, '', HEADLESS_WP_THEME_VERSION, 'screen');
-
-
-	wp_enqueue_style('headless-wp-editor-css');
-}
-
-add_action('wp_enqueue_scripts', 'headless_wp_theme_enqueue_scripts_styles');
-
-function remove_menus()
-{
-	//     remove_menu_page( "index.php" ); //Dashboard
 	remove_menu_page("jetpack"); //Jetpack*
 	remove_menu_page("edit-comments.php"); //Comments
 }
 
-add_action("admin_menu", "remove_menus");
+add_action("admin_menu", "headless_remove_menus");
 
 // Remove Admin bar
 // function remove_admin_bar()
 // {
 //     return false;
 // }
-
-// include_once("functions/custom-post-types.php");
-// include_once("functions/custom-shortcodes.php");
-// include_once("functions/custom-taxonomies.php");
 
 function headless_custom_menu_order($menu_ord)
 {
@@ -136,60 +95,6 @@ add_action("do_feed_rss2", "headless_wp_theme_disable_feed", 1);
 add_action("do_feed_atom", "headless_wp_theme_disable_feed", 1);
 add_action("do_feed_rss2_comments", "headless_wp_theme_disable_feed", 1);
 add_action("do_feed_atom_comments", "headless_wp_theme_disable_feed", 1);
-
-/**
- * ACF (Advanced Custom Fields) functions used in this theme
- * Will only fire if acf is installed and active
- */
-// function headless_wp_theme_settings_acf()
-// {
-// 	// Register themes acf options page.
-// 	$option_page = acf_add_options_page(array(
-// 		'page_title'    => __('Theme General Settings'),
-// 		'menu_title'    => __('Theme Settings'),
-// 		'menu_slug'     => 'theme-general-settings',
-// 		'capability'	=> 'edit_posts',
-// 		'redirect'		=> false,
-// 		'show_in_graphql' => true,
-// 		// 'update_button' => __('Update', 'acf'),
-// 		// 'updated_message' => __("Theme Settings Updated", 'acf')
-// 	));
-// }
-// First Check that ACF (advance custom fields is installed and active)d and than initialise the optiosn page
-// if (class_exists('acf')) {
-// 	add_action('acf/init', 'headless_wp_theme_settings_acf');
-// }
-
-// Return `null` if an empty value is returned from ACF.
-// if (!function_exists("acf_nullify_empty")) {
-//   function acf_nullify_empty($value, $post_id, $field) {
-//       if (empty($value)) {
-//           return null;
-//       }
-//       return $value;
-//   }
-// }
-// add_filter("acf/format_value", "acf_nullify_empty", 100, 3);
-
-
-add_action('acf/init', 'my_acf_op_init');
-function my_acf_op_init()
-{
-
-	// Check function exists.
-	if (function_exists('acf_add_options_page')) {
-
-		// Register options page.
-		$option_page = acf_add_options_page(array(
-			'page_title'    => __('Theme General Settings'),
-			'menu_title'    => __('Theme Settings'),
-			'menu_slug'     => 'theme-general-settings',
-			'capability'    => 'edit_posts',
-			'redirect'      => false,
-			'show_in_graphql' => true
-		));
-	}
-}
 
 function headless_wp_theme_block_categories()
 {
